@@ -11,7 +11,9 @@ import (
 )
 
 // userService is a struct implementing UserServiceServer
-type userService struct{}
+type userService struct {
+	user.UnimplementedUserServiceServer
+}
 
 // GreetUser return greeting message given the name and salutation
 // in gRPC protocol
@@ -24,7 +26,7 @@ func (*userService) GreetUser(ctx context.Context, req *user.GreetingRequest) (*
 }
 
 func main() {
-	lis, err := net.Listen("tcp", ":5001")
+	lis, err := net.Listen("tcp", "127.0.0.1:5001")
 	if err != nil {
 		log.Fatalf("Failed to listen on port: %v", err)
 	}
@@ -32,6 +34,7 @@ func main() {
 	server := grpc.NewServer()
 
 	user.RegisterUserServiceServer(server, &userService{})
+	log.Println("SERVER: running at tcp :5001")
 
 	if err := server.Serve(lis); err != nil {
 		log.Fatal(err.Error())
