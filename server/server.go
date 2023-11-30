@@ -1,29 +1,14 @@
 package main
 
 import (
-	"context"
-	"fmt"
 	"log"
 	"net"
 
+	"github.com/rezaif79-ri/go-grpc-101/model/calculator"
 	"github.com/rezaif79-ri/go-grpc-101/model/user"
+	"github.com/rezaif79-ri/go-grpc-101/server/service"
 	"google.golang.org/grpc"
 )
-
-// userService is a struct implementing UserServiceServer
-type userService struct {
-	user.UnimplementedUserServiceServer
-}
-
-// GreetUser return greeting message given the name and salutation
-// in gRPC protocol
-func (*userService) GreetUser(ctx context.Context, req *user.GreetingRequest) (*user.GreetingResponse, error) {
-	//business logic
-	salutationMessage := fmt.Sprintf("Howdy, %s %s, nice to see you in the future!",
-		req.Salut, req.Name)
-
-	return &user.GreetingResponse{GreetingMessage: salutationMessage}, nil
-}
 
 func main() {
 	lis, err := net.Listen("tcp", "127.0.0.1:5001")
@@ -32,8 +17,11 @@ func main() {
 	}
 
 	server := grpc.NewServer()
+	calculatorService := service.NewCalculatorServices()
+	userService := service.NewUserService()
 
-	user.RegisterUserServiceServer(server, &userService{})
+	user.RegisterUserServiceServer(server, userService)
+	calculator.RegisterCalculatorServiceServer(server, calculatorService)
 	log.Println("SERVER: running at tcp :5001")
 
 	if err := server.Serve(lis); err != nil {
