@@ -15,6 +15,7 @@ func SetupRouter(app *fiber.App) {
 	conn, err := config.NewServiceGrpcConn()
 	if err != nil {
 		log.Fatalf("Could not connect to service: %v", err)
+		conn.Close()
 		return
 	}
 	// Init model
