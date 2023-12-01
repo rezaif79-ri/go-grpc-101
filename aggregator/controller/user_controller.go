@@ -19,7 +19,7 @@ func NewUserController(userService *domain.UserService) domain.UserController {
 	}
 }
 
-func (uc *userController) GreetUser(c *fiber.Ctx) {
+func (uc *userController) GreetUser(c *fiber.Ctx) error {
 	type requestBody struct {
 		FirstName  string `json:"first_name"`
 		LastName   string `json:"last_name"`
@@ -28,12 +28,11 @@ func (uc *userController) GreetUser(c *fiber.Ctx) {
 	var body requestBody
 	err := c.BodyParser(&body)
 	if err != nil {
-		c.Status(http.StatusBadRequest).JSON(map[string]interface{}{
+		return c.Status(http.StatusBadRequest).JSON(map[string]interface{}{
 			"status":  http.StatusBadRequest,
 			"message": err.Error(),
 			"data":    nil,
 		})
-		return
 	}
 
 	res, err := uc.UserService.GreetUser(construct.GreetUserReq{
@@ -41,18 +40,16 @@ func (uc *userController) GreetUser(c *fiber.Ctx) {
 		Salutation: body.Salutation,
 	})
 	if err != nil {
-		c.Status(http.StatusInternalServerError).JSON(map[string]interface{}{
+		return c.Status(http.StatusInternalServerError).JSON(map[string]interface{}{
 			"status":  http.StatusInternalServerError,
 			"message": err.Error(),
 			"data":    nil,
 		})
-		return
 	}
 
-	c.Status(http.StatusOK).JSON(map[string]interface{}{
+	return c.Status(http.StatusOK).JSON(map[string]interface{}{
 		"status":  http.StatusOK,
 		"message": "OK",
 		"data":    res,
 	})
-
 }

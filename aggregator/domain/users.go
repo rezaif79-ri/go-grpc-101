@@ -6,7 +6,7 @@ import (
 )
 
 type UserController interface {
-	GreetUser(c *fiber.Ctx)
+	GreetUser(c *fiber.Ctx) error
 }
 
 type UserService interface {
