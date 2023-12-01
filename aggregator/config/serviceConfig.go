@@ -10,6 +10,5 @@ func NewServiceGrpcConn() (*grpc.ClientConn, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer conn.Close()
 	return conn, err
 }
