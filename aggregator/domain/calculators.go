@@ -7,8 +7,8 @@ type CalculatorController interface {
 }
 
 type CalculatorService interface {
-	CalcAddition(a float64, b float64) (res float64, err error)
-	CalcSubstraction(a float64, b float64) (res float64, err error)
-	CalcMultiplication(a float64, b float64) (res float64, err error)
-	CalcDivision(a float64, b float64) (res float64, err error)
+	CalcAddition(a float32, b float32) (res float32, err error)
+	CalcSubstraction(a float32, b float32) (res float32, err error)
+	CalcMultiplication(a float32, b float32) (res float32, err error)
+	CalcDivision(a float32, b float32) (res float32, err error)
 }
