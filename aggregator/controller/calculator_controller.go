@@ -13,9 +13,9 @@ type calculatorController struct {
 	goValidator       *util.GoValidator
 }
 
-func NewCalculatorController(validator util.GoValidator, cs domain.CalculatorService) domain.CalculatorController {
+func NewCalculatorController(validator util.GoValidator, cs *domain.CalculatorService) domain.CalculatorController {
 	return &calculatorController{
-		calculatorService: cs,
+		calculatorService: *cs,
 		goValidator:       &validator,
 	}
 }
