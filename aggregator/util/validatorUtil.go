@@ -1,11 +1,16 @@
 package util
 
-import "github.com/go-playground/validator/v10"
+import (
+	"fmt"
+
+	"github.com/go-playground/validator/v10"
+)
 
 type (
 	ErrorResponse struct {
 		Error       bool
 		FailedField string
+		Message     string
 		Tag         string
 		Value       interface{}
 	}
@@ -14,8 +19,26 @@ type (
 	}
 )
 
+var goValidatorErrDict = map[string]string{
+	"arithmatic_operators_enum": "Only +, -, /, * math operators allowed",
+}
+
+func getGoValidatorRegisteredErr(tag string) (msg string, found bool) {
+	msg = ""
+	found = false
+
+	if errMsg, ok := goValidatorErrDict[tag]; ok {
+		msg = errMsg
+		found = true
+	}
+	return msg, found
+}
+
 func NewGoValidator() *GoValidator {
 	var validate = validator.New()
+
+	validate.RegisterValidation("arithmatic_operators_enum", arithmaticOperatorEnum)
+
 	return &GoValidator{
 		validator: validate,
 	}
@@ -33,6 +56,23 @@ func (gv *GoValidator) ValidateStruct(data interface{}) []ErrorResponse {
 			res.Tag = err.Tag()           // Export struct tag
 			res.Value = err.Value()       // Export field value
 			res.Error = true
+
+			if msg, found := getGoValidatorRegisteredErr(res.Tag); found {
+				res.Message = fmt.Sprintf(
+					"[%s]: '%v' | Error '%s' - %s",
+					res.FailedField,
+					res.Value,
+					res.Tag,
+					msg,
+				)
+			} else {
+				res.Message = fmt.Sprintf(
+					"[%s]: '%v' | Needs to implement '%s'",
+					res.FailedField,
+					res.Value,
+					res.Tag,
+				)
+			}
 
 			validationErrors = append(validationErrors, res)
 		}
