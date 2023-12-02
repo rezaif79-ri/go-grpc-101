@@ -6,6 +6,8 @@ import (
 	"github.com/go-playground/validator/v10"
 )
 
+const arithmetic_operators_enum = "arithmetic_operators_enum"
+
 type (
 	ErrorResponse struct {
 		Error       bool
@@ -20,7 +22,7 @@ type (
 )
 
 var goValidatorErrDict = map[string]string{
-	"arithmatic_operators_enum": "Only +, -, /, * math operators allowed",
+	arithmetic_operators_enum: "Only +, -, /, * math operators allowed",
 }
 
 func getGoValidatorRegisteredErr(tag string) (msg string, found bool) {
@@ -37,7 +39,7 @@ func getGoValidatorRegisteredErr(tag string) (msg string, found bool) {
 func NewGoValidator() *GoValidator {
 	var validate = validator.New()
 
-	validate.RegisterValidation("arithmatic_operators_enum", arithmaticOperatorEnum)
+	validate.RegisterValidation(arithmetic_operators_enum, arithmeticOperatorEnum)
 
 	return &GoValidator{
 		validator: validate,
