@@ -5,8 +5,20 @@ on:
             - main
 
 jobs:
-    commitlint:
+    commit_lint:
         runs-on: ubuntu-latest
+        outputs:
+            lint_result: ${{steps.commit-lint.outputs}}
         steps:
-        - uses: actions/checkout@v3
-        - uses: wagoid/commitlint-github-action@v5
+            -   id: checkout
+                uses: actions/checkout@v3
+            -   id: commit-lint
+                uses: wagoid/commitlint-github-action@v5
+    
+    commit_lint_result:
+        runs-on: ubuntu-latest
+        needs: commit_lint
+        steps:
+            -   env:
+                    result: ${{needs.commit_lint.outputs.lint_result}}
+                run: echo "$result"
