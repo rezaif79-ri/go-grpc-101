@@ -7,21 +7,12 @@ on:
 jobs:
     commit_lint:
         runs-on: ubuntu-latest
-        # outputs:
-        #     lint_result: ${{steps.commit-lint.outputs.result}}
+        outputs:
+            lint_result: ${{steps.commit-lint.outputs.result}}
         steps:
             -   id: checkout
                 uses: actions/checkout@v3
             -   id: commit-lint
                 uses: wagoid/commitlint-github-action@v5
-                with:
-                    script: |
-                      core.info(`Step result is: ${{steps.commit_lint.outputs.result}}`)
+            -   run: echo ${{steps.commit-lint.outputs.results}}
     
-    # commit_lint_result:
-    #     runs-on: ubuntu-latest
-    #     needs: commit_lint
-    #     steps:
-    #         -   env:
-    #                 result: ${{needs.commit_lint.outputs.lint_result}}
-    #             run: echo "$result"
