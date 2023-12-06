@@ -4,8 +4,8 @@ import (
 	"log"
 	"net"
 
-	"github.com/rezaif79-ri/go-grpc-101/model/calculator"
-	"github.com/rezaif79-ri/go-grpc-101/model/user"
+	"github.com/rezaif79-ri/go-grpc-101/server/model/calculator"
+	"github.com/rezaif79-ri/go-grpc-101/server/model/user"
 	"github.com/rezaif79-ri/go-grpc-101/server/service"
 	"google.golang.org/grpc"
 )
