@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	lis, err := net.Listen("tcp", "127.0.0.1:5001")
+	lis, err := net.Listen("tcp", ":5001")
 	if err != nil {
 		log.Fatalf("Failed to listen on port: %v", err)
 	}
