@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"github.com/rezaif79-ri/go-grpc-101/aggregator/domain"
-	"github.com/rezaif79-ri/go-grpc-101/model/calculator"
+	"github.com/rezaif79-ri/go-grpc-101/aggregator/model/calculator"
 )
 
 type CalculatorService struct {

@@ -6,10 +6,10 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/rezaif79-ri/go-grpc-101/aggregator/config"
 	"github.com/rezaif79-ri/go-grpc-101/aggregator/controller"
+	"github.com/rezaif79-ri/go-grpc-101/aggregator/model/calculator"
+	"github.com/rezaif79-ri/go-grpc-101/aggregator/model/user"
 	"github.com/rezaif79-ri/go-grpc-101/aggregator/service"
 	"github.com/rezaif79-ri/go-grpc-101/aggregator/util"
-	"github.com/rezaif79-ri/go-grpc-101/model/calculator"
-	"github.com/rezaif79-ri/go-grpc-101/model/user"
 )
 
 func SetupRouter(app *fiber.App) {
