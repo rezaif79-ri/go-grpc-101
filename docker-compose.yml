@@ -1,0 +1,23 @@
+services:
+  aggregator:
+    build:
+      context: .
+      dockerfile: ./.aggregator.dockerfile
+    image: rezaif79-ri/aggregator-grpc101:0.1
+    container_name: aggregator-grpc-101
+    environment:
+      - GRPC_SERVICE_HOST=host.docker.internal:5001
+    ports:
+      - 6001:6001
+    depends_on:
+      - server
+    
+
+  server:
+    build:
+      context: .
+      dockerfile: ./.server.dockerfile
+    image: rezaif79-ri/server-grpc101:0.1
+    container_name: server-grpc-101
+    ports:
+        - 5001:5001
