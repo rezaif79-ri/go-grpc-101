@@ -6,7 +6,7 @@ import (
 
 	"github.com/rezaif79-ri/go-grpc-101/aggregator/domain"
 	"github.com/rezaif79-ri/go-grpc-101/aggregator/domain/construct"
-	"github.com/rezaif79-ri/go-grpc-101/model/user"
+	"github.com/rezaif79-ri/go-grpc-101/aggregator/model/user"
 )
 
 type userService struct {
