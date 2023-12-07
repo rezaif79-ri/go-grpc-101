@@ -8,7 +8,7 @@ import (
 	"github.com/rezaif79-ri/go-grpc-101/aggregator/router"
 )
 
-const userServiceAddress = "localhost:5001"
+const userServiceAddress = ":5001"
 
 func main() {
 
@@ -21,5 +21,5 @@ func main() {
 
 	router.SetupRouter(app)
 
-	app.Listen("127.0.0.1:3210")
+	app.Listen(":3210")
 }
