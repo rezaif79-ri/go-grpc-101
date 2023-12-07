@@ -8,8 +8,6 @@ import (
 	"github.com/rezaif79-ri/go-grpc-101/aggregator/router"
 )
 
-const userServiceAddress = ":5001"
-
 func main() {
 
 	app := fiber.New(fiber.Config{
