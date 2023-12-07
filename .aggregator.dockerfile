@@ -15,6 +15,6 @@ COPY . .
 
 RUN go build -o ./out/app ./server.go
 
-EXPOSE 5001
+EXPOSE 6001
 
 CMD ["./out/app"]

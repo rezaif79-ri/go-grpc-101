@@ -19,5 +19,5 @@ func main() {
 
 	router.SetupRouter(app)
 
-	app.Listen(":3210")
+	app.Listen(":6001")
 }
