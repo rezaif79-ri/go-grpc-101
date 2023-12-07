@@ -1,0 +1,61 @@
+syntax="proto3";
+
+// Package definition in Go.
+// When generating protobuf, 
+// the folder structure will follows.
+option go_package="server/model/calculator";
+
+// Package definition
+package calculator;
+
+// Request payload
+message AdditionRequest{
+    float number_a = 1;
+    float number_b = 2;
+}
+
+// Response payload
+message AdditionResponse{
+    float result = 1;
+}
+
+// Request payload
+message SubstractionRequest{
+    float number_a = 1;
+    float number_b = 2;
+}
+
+// Response payload
+message SubstractionResponse{
+    float result = 1;
+}
+
+// Request payload
+message MultiplicationRequest{
+    float number_a = 1;
+    float number_b = 2;
+}
+
+// Response payload
+message MultiplicationResponse{
+    float result = 1;
+}
+
+// Request payload
+message DivisionRequest{
+    float number_a = 1;
+    float number_b = 2;
+}
+
+// Response payload
+message DivisionResponse{
+    float result = 1;
+}
+
+// Define RPC service
+service CalculatorService{
+    rpc Addition(AdditionRequest) returns (AdditionResponse);
+    rpc Substraction(SubstractionRequest) returns (SubstractionResponse);
+    rpc Multiplication(MultiplicationRequest) returns (MultiplicationResponse);
+    rpc Division(DivisionRequest) returns (DivisionResponse);
+}

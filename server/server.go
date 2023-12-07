@@ -4,14 +4,14 @@ import (
 	"log"
 	"net"
 
-	"github.com/rezaif79-ri/go-grpc-101/model/calculator"
-	"github.com/rezaif79-ri/go-grpc-101/model/user"
+	"github.com/rezaif79-ri/go-grpc-101/server/model/calculator"
+	"github.com/rezaif79-ri/go-grpc-101/server/model/user"
 	"github.com/rezaif79-ri/go-grpc-101/server/service"
 	"google.golang.org/grpc"
 )
 
 func main() {
-	lis, err := net.Listen("tcp", "127.0.0.1:5001")
+	lis, err := net.Listen("tcp", ":5001")
 	if err != nil {
 		log.Fatalf("Failed to listen on port: %v", err)
 	}

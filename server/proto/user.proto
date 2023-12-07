@@ -1,0 +1,25 @@
+syntax="proto3";
+
+// Package definition in Go.
+// When generating protobuf, 
+// the folder structure will follows.
+option go_package="server/model/user";
+
+// Package definition
+package user;
+
+// Request payload
+message GreetingRequest{
+    string name = 1;
+    string salut = 2;
+}
+
+// Response payload
+message GreetingResponse{
+    string GreetingMessage = 1;
+}
+
+// Define RPC service
+service UserService{
+    rpc GreetUser(GreetingRequest) returns (GreetingResponse);
+}

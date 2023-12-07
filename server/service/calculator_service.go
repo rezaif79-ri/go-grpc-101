@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 
-	"github.com/rezaif79-ri/go-grpc-101/model/calculator"
+	"github.com/rezaif79-ri/go-grpc-101/server/model/calculator"
 )
 
 type CalculatorService struct {
