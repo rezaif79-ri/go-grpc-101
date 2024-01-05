@@ -1,6 +1,8 @@
 package main
 
 import (
+	"github.com/gofiber/fiber/v2/middleware/pprof"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/logger"
@@ -13,6 +15,7 @@ func main() {
 	app := fiber.New(fiber.Config{
 		EnablePrintRoutes: true,
 	})
+	app.Use(pprof.New())
 	app.Use(recover.New())
 	app.Use(cors.New())
 	app.Use(logger.New())
